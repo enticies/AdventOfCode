@@ -56,8 +56,6 @@ def calculate_board(board, draws):
 
     return t * draws[-1]
 
-
-
 def find_winner(boards, draws):
     d = []
     for draw in draws:
@@ -65,12 +63,27 @@ def find_winner(boards, draws):
             if check_board(board, d):
                 return calculate_board(board, d)
         d.append(draw)
-
     return None
+
+def find_last_winner(boards, draws):
+    scores = []
+    d = []
+
+    for draw in draws:
+        for board in boards:
+            if check_board(board, d):
+                winner = board
+                scores.append(calculate_board(board, d))
+                boards.remove(board)
+        d.append(draw)
+
+    return scores 
+
 
 if __name__ == "__main__":
     boards, draws = main()
 
-    score = find_winner(boards, draws)
+    # score = find_winner(boards, draws)
+    score = find_last_winner(boards, draws)
     print(score)
 
