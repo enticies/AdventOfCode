@@ -20,6 +20,10 @@ def create_table(lines):
 
     table = []
 
+    # max_x = 5
+    # max_y = 5
+
+
     for i in range(max_y + 1):
         table.append([0] * (max_x + 1))
 
@@ -27,8 +31,15 @@ def create_table(lines):
 
 def mark_line(table, coors):
     x1, x2, y1, y2 = coors[0][0], coors[1][0], coors[0][1], coors[1][1]
-    
-    if x1 == x2:
+   
+
+    if abs(x1 - x2) == abs(y1 - y2):
+        for i in range(abs(y1 - y2) + 1):
+            dist_y = i if y1 < y2 else -i
+            dist_x = i if x1 < x2 else -i
+
+            table[y1 + dist_y][x1 + dist_x] += 1
+    elif x1 == x2:
         for i in range(abs(y1 - y2) + 1):
             dist = i if y1 < y2 else -i
             table[y1 + dist][x1] += 1 
@@ -57,7 +68,9 @@ def calculate_table(table):
 if __name__=="__main__":
     lines = parse_file()
     table = create_table(lines)
+    # marked = mark_table(table, [[[2, 4], [4, 2]]])
     marked = mark_table(table, lines)
+    # pprint(marked)
     total = calculate_table(marked)
     print(total)
 
