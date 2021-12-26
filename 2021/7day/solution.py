@@ -16,7 +16,12 @@ def find_min(positions):
 
     return min_fuel
 
+
+memo = {}
 def add(a, b):
+    if abs(a - b) in memo:
+        return memo[abs(a - b)]
+
     ret = 0
     i = 0
     cost = 1
@@ -24,6 +29,7 @@ def add(a, b):
         ret += cost
         cost += 1
         i += 1
+    memo[abs(a - b)] = ret
     return ret
 
 
