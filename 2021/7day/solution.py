@@ -6,20 +6,30 @@ def get_input():
 
 def find_min(positions):
     min_fuel = 1000000000
-
-    for i in positions:
+    for i in range(max(positions)):
         ret = 0
         for a in positions:
-            ret += abs(a - i)
+            ret += add(i, a) 
 
         min_fuel = min(ret, min_fuel)
 
 
     return min_fuel
 
+def add(a, b):
+    ret = 0
+    i = 0
+    cost = 1
+    while i != abs(a - b):
+        ret += cost
+        cost += 1
+        i += 1
+    return ret
+
+
+
 if __name__=="__main__":
     positions = get_input()
     min_fuel = find_min(positions)
-
     print(min_fuel)
 
