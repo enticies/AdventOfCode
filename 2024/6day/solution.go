@@ -13,7 +13,7 @@ import (
 const pattern = "XMAS"
 
 func main() {
-	filePath := "input.txt"
+	filePath := "example_input.txt"
 
 	content, err := ioutil.ReadFile(filePath)
 
@@ -23,15 +23,14 @@ func main() {
 
 	inp := parseInput(content)
 
-	// partOneResult := partOneSolution(inp)
+	partOneResult := partOneSolution(inp)
 	partTwoResult := partTwoSolution(inp)
 
-	// fmt.Printf("Part one result is %d\n", partOneResult)
+	fmt.Printf("Part one result is %d\n", partOneResult)
 	fmt.Printf("Part two result is %d\n", partTwoResult)
 }
 
 func parseInput(content []byte) [][]string {
-	// result := make([][]string, 0)
 	spl := strings.Split(strings.TrimSpace(string(content)), "\n")
 
 	lines := make([][]string, 0)
@@ -230,7 +229,7 @@ func createsLoop(lines [][]string, row int, col int) bool {
 			}
 		}
 
-		// printMatrix(lines)
+		printMatrix(lines)
 	}
 
 	return loop
@@ -258,8 +257,6 @@ func partTwoSolution(lines [][]string) int {
 
 			new_copy := copyMatrix(lines)
 			new_copy[r][c] = "#"
-
-			fmt.Println(r, c)
 
 			if createsLoop(new_copy, row, col) {
 				total++
