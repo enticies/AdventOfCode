@@ -11,7 +11,7 @@ import (
 const pattern = "XMAS"
 
 func main() {
-	filePath := "input.txt"
+	filePath := "example_input.txt"
 
 	content, err := ioutil.ReadFile(filePath)
 
@@ -81,9 +81,7 @@ func canEqual(testValue int, values []int, currentTotal int) bool {
 	result := false
 
 	for _, operation := range operations {
-		result = canEqual(testValue, values[1:], executeOperation(currentTotal, values[0], operation))
-
-		if result {
+		if canEqual(testValue, values[1:], executeOperation(currentTotal, values[0], operation)) {
 			return true
 		}
 	}
