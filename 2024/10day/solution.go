@@ -64,7 +64,14 @@ func findTrailHeads(matrix [][]int) []Coordinate {
 	return coordinates
 }
 
-var total = 0
+func copyMatrix(original [][]int) [][]int {
+    copy := make([][]int, len(original))
+    for i := range original {
+        copy[i] = make([]int, len(original[i]))
+        copy[i] = append([]int{}, original[i]...)
+    }
+    return copy
+}
 
 func partOneSolution(matrix [][]int) int {
 	trailHeads := findTrailHeads(matrix)
@@ -72,11 +79,7 @@ func partOneSolution(matrix [][]int) int {
 	total := 0
 
 	for _, trailHead := range trailHeads {
-		u := make(map[Coordinate]bool)
-
-		walkRecursive(matrix, trailHead, u)
-
-		total += len(u)
+		total += walkRecursive(copyMatrix(matrix), trailHead)
 	}
 
 	return total
@@ -118,39 +121,41 @@ func walkRecursivePartTwo(matrix [][]int, coordinate Coordinate) int {
 	return total 
 }
 
-func walkRecursive(matrix [][]int, coordinate Coordinate, u map[Coordinate]bool) {
+func walkRecursive(matrix [][]int, coordinate Coordinate) int {
 	if matrix[coordinate.x][coordinate.y] == 9 {
-		u[Coordinate{x: coordinate.x, y: coordinate.y}] = true
-		return
+		matrix[coordinate.x][coordinate.y] = -1
+		return 1
 	}
 
+	total := 0
+
 	if isValidCoordinate(matrix, coordinate, "DOWN") && matrix[coordinate.x+1][coordinate.y]-matrix[coordinate.x][coordinate.y] == 1 {
-		walkRecursive(matrix, Coordinate{
+		total += walkRecursive(matrix, Coordinate{
 			x: coordinate.x + 1,
 			y: coordinate.y,
-		}, u)
+		})
 	}
 	if isValidCoordinate(matrix, coordinate, "RIGHT") && matrix[coordinate.x][coordinate.y+1]-matrix[coordinate.x][coordinate.y] == 1 {
-		walkRecursive(matrix, Coordinate{
+		total += walkRecursive(matrix, Coordinate{
 			x: coordinate.x,
 			y: coordinate.y + 1,
-		}, u)
+		})
 	}
 
 	if isValidCoordinate(matrix, coordinate, "LEFT") && matrix[coordinate.x][coordinate.y-1]-matrix[coordinate.x][coordinate.y] == 1 {
-		walkRecursive(matrix, Coordinate{
+		total += walkRecursive(matrix, Coordinate{
 			x: coordinate.x,
 			y: coordinate.y - 1,
-		}, u)
+		})
 	}
 	if isValidCoordinate(matrix, coordinate, "UP") && matrix[coordinate.x-1][coordinate.y]-matrix[coordinate.x][coordinate.y] == 1 {
-		walkRecursive(matrix, Coordinate{
+		total += walkRecursive(matrix, Coordinate{
 			x: coordinate.x - 1,
 			y: coordinate.y,
-		}, u)
+		})
 	}
 
-	return
+	return total
 }
 
 func isValidCoordinate(matrix [][]int, coordinate Coordinate, direction string) bool {
