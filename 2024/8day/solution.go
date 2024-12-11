@@ -8,8 +8,6 @@ import (
 	"unicode"
 )
 
-const pattern = "XMAS"
-
 func main() {
 	filePath := "input.txt"
 

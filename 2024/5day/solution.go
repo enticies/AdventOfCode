@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-const pattern = "XMAS"
-
 func main() {
 	filePath := "input.txt"
 

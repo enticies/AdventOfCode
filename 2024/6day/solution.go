@@ -10,8 +10,6 @@ import (
 	"time"
 )
 
-const pattern = "XMAS"
-
 func main() {
 	filePath := "example_input.txt"
 

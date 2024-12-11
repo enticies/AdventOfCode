@@ -153,10 +153,6 @@ func walkRecursive(matrix [][]int, coordinate Coordinate, u map[Coordinate]bool)
 	return
 }
 
-func isAtCorner(matrix [][]int, coordinate Coordinate) bool {
-	return coordinate.x == 0 || coordinate.x == len(matrix)-1 || coordinate.y == 0 || coordinate.y == len(matrix[0])-1
-}
-
 func isValidCoordinate(matrix [][]int, coordinate Coordinate, direction string) bool {
 	if direction == "UP" && coordinate.x > 0 {
 		return true
