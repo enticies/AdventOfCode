@@ -1,7 +1,7 @@
 use std::collections::btree_map::Keys;
 
 pub fn main() {
-    let input = "9226466333-9226692707,55432-96230,4151-6365,686836-836582,519296-634281,355894-471980,971626-1037744,25107-44804,15139904-15163735,155452-255998,2093-4136,829776608-829880425,4444385616-4444502989,2208288-2231858,261-399,66-119,91876508-91956018,2828255673-2828317078,312330-341840,6464-10967,5489467-5621638,1-18,426-834,3434321102-3434378477,4865070-4972019,54475091-54592515,147-257,48664376-48836792,45-61,1183-1877,24-43";
+    let input = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
     let mut total: i64 = 0;
 
     input.split(',').for_each(|line| {
@@ -10,6 +10,7 @@ pub fn main() {
         let num_two = num_two.parse::<i64>().unwrap();
         total += sum_invalid_ids(num_one, num_two);
     });
+
 
     println!("Total: {}", total);
 
@@ -21,7 +22,7 @@ pub fn sum_invalid_ids(num_one: i64, num_two: i64) -> i64 {
 
     for i in num_one..=num_two {
         let id = i.to_string();
-        if is_invalid_id(id) {
+        if is_invalid_id_part_two(id) {
             total += i;
         }
     }
@@ -29,7 +30,26 @@ pub fn sum_invalid_ids(num_one: i64, num_two: i64) -> i64 {
     return total;
 }
 
-pub fn is_invalid_id(id: String) -> bool {
+pub fn is_invalid_id_part_two(id: String) -> bool {
+    let midpoint = id.len() / 2;
+
+    for i in 0..midpoint {
+        let substring: String = id.chars().take(i + 1).collect();
+        let mut new_string = String::new();
+
+        while new_string.len() < id.len() {
+            new_string.push_str(&substring);
+        }
+
+        if new_string == id {
+            return true;
+        }
+    }
+
+    false
+}
+
+pub fn is_invalid_id_part_one(id: String) -> bool {
     if id.len() % 2 != 0 {
         return false;
     }
