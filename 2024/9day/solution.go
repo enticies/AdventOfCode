@@ -20,10 +20,10 @@ func main() {
 
 	inp := parseInput(content)
 
-	// partOneResult := partOneSolution(inp)
+	partOneResult := partOneSolution(inp)
 	partTwoResult := partTwoSolution(inp)
 
-	// fmt.Printf("Part one result is %d\n", partOneResult)
+	fmt.Printf("Part one result is %d\n", partOneResult)
 	fmt.Printf("Part two result is %d\n", partTwoResult)
 }
 
