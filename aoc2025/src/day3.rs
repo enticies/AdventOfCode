@@ -37,7 +37,7 @@ fn find_index_to_remove(s: &Vec<char>) -> usize {
     return 0;
 }
 
-pub fn part_two(bank: &str) -> i64{
+pub fn part_two(bank: &str) -> i64 {
     let mut bank_vec: Vec<char> = bank.chars().into_iter().collect();
 
     for _ in 0..bank.len() - 12 {

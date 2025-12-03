@@ -21,15 +21,10 @@ L82
         let direction = line_chars.next().unwrap();
         let distance = line_chars.as_str().parse::<i32>().ok().unwrap();
 
-        if direction == 'L' {
-            let (new_point, click_count) = foo(current_point, distance, direction);
-            total_click_count += click_count;
-            current_point = new_point;
-        } else {
-            let (new_point, click_count) = foo(current_point, distance, direction);
-            total_click_count += click_count;
-            current_point = new_point;
-        }
+
+        let (new_point, click_count) = foo(current_point, distance, direction);
+        total_click_count += click_count;
+        current_point = new_point;
 
         println!(
             "direction: {}, distance: {}, current point: {},  click count {}",
