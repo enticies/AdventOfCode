@@ -39,7 +39,7 @@ pub fn main() {
     part_two(&mut grid);
 }
 
-pub fn count_accessible_rolls(grid: &Grid) -> Vec<(usize, usize)> {
+pub fn find_accessible_rolls(grid: &Grid) -> Vec<(usize, usize)> {
     let mut marked_rolls = vec![];
 
     for (row_index, row) in grid.iter().enumerate() {
@@ -62,7 +62,7 @@ pub fn part_two(grid: &mut Grid) {
     let mut total = 0;
 
     loop {
-        let marked_rolls = count_accessible_rolls(grid);
+        let marked_rolls = find_accessible_rolls(grid);
         if marked_rolls.is_empty() {
             break;
         }
