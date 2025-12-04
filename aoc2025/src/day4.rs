@@ -12,7 +12,8 @@ const NEIGHBOR_OFFSETS_ROW_COL: [(isize, isize); 8] = [
 ];
 
 pub fn main() {
-    let real_input = "";
+    let real_input = "
+    ";
 
     let example_input = "
 ..@@.@@@@.
@@ -45,7 +46,7 @@ pub fn count_accessible_rolls(grid: &Grid) -> Vec<(usize, usize)> {
         for (column_index, _) in row.iter().enumerate() {
             if grid[row_index][column_index] == '@' {
                 let neighbour_paper_count =
-                    count_paper(&grid, column_index as isize, row_index as isize);
+                    count_paper(grid, column_index as isize, row_index as isize);
                 let can_access = neighbour_paper_count < 4;
                 if can_access {
                     marked_rolls.push((row_index, column_index));
@@ -62,7 +63,7 @@ pub fn part_two(grid: &mut Grid) {
 
     loop {
         let marked_rolls = count_accessible_rolls(grid);
-        if marked_rolls.len() == 0 {
+        if marked_rolls.is_empty() {
             break;
         }
 
@@ -71,7 +72,7 @@ pub fn part_two(grid: &mut Grid) {
         remove_rolls(grid, marked_rolls);
     }
 
-    println!("{}", total);
+    println!("{total}");
 }
 
 pub fn remove_rolls(grid: &mut Grid, rolls_to_remove: Vec<(usize, usize)>) {
@@ -89,7 +90,7 @@ pub fn part_one(grid: &mut Grid) {
         for (column_index, _) in row.iter().enumerate() {
             if grid[row_index][column_index] == '@' {
                 let neighbour_paper_count =
-                    count_paper(&grid, column_index as isize, row_index as isize);
+                    count_paper(grid, column_index as isize, row_index as isize);
                 let can_access = neighbour_paper_count < 4;
                 if can_access {
                     cloned_grid[row_index][column_index] = 'x';
@@ -98,7 +99,7 @@ pub fn part_one(grid: &mut Grid) {
             }
         }
     }
-    println!("{}", total);
+    println!("{total}");
 }
 
 pub fn count_paper(grid: &Grid, col: isize, row: isize) -> u32 {
@@ -111,14 +112,12 @@ pub fn count_paper(grid: &Grid, col: isize, row: isize) -> u32 {
         let neighbor_row = d_row + row;
 
         if neighbor_col >= 0
-            && neighbor_col <= grid_width as isize - 1
+            && neighbor_col < grid_width as isize
             && neighbor_row >= 0
-            && neighbor_row <= grid_height as isize - 1
-        {
-            if grid[neighbor_row as usize][neighbor_col as usize] == '@' {
+            && neighbor_row < grid_height as isize 
+            && grid[neighbor_row as usize][neighbor_col as usize] == '@' {
                 number_of_rolls_of_paper += 1;
             }
-        }
     }
 
     number_of_rolls_of_paper
@@ -126,6 +125,6 @@ pub fn count_paper(grid: &Grid, col: isize, row: isize) -> u32 {
 
 pub fn print_grid(grid: &Grid) {
     for row in grid.iter() {
-        println!("{:?}", row);
+        println!("{row:?}");
     }
 }
