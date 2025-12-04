@@ -84,8 +84,6 @@ pub fn remove_rolls(grid: &mut Grid, rolls_to_remove: Vec<(usize, usize)>) {
 pub fn part_one(grid: &mut Grid) {
     let mut total = 0;
 
-    let mut cloned_grid = grid.clone();
-
     for (row_index, row) in grid.iter().enumerate() {
         for (column_index, _) in row.iter().enumerate() {
             if grid[row_index][column_index] == '@' {
@@ -93,7 +91,6 @@ pub fn part_one(grid: &mut Grid) {
                     count_paper(grid, column_index as isize, row_index as isize);
                 let can_access = neighbour_paper_count < 4;
                 if can_access {
-                    cloned_grid[row_index][column_index] = 'x';
                     total += 1;
                 }
             }
