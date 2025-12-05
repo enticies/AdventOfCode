@@ -129,10 +129,7 @@ pub fn merge_ranges(range_one: &Range, range_two: &Range) -> Range {
 }
 
 pub fn overlaps(a: &Range, b: &Range) -> bool {
-    let (a0, a1) = if a.0 <= a.1 { *a } else { (a.1, a.0) };
-    let (b0, b1) = if b.0 <= b.1 { *b } else { (b.1, b.0) };
-
-    a0.max(b0) <= a1.min(b1)
+    a.0 <= b.1 && b.0 <= a.1
 }
 
 pub fn part_one(fresh_ingredient_id_ranges: &Vec<Range>, ids: Vec<u64>) {
