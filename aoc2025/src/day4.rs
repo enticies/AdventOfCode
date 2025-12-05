@@ -1,6 +1,6 @@
 type Grid = Vec<Vec<char>>;
 
-const NEIGHBOR_OFFSETS_ROW_COL: [(isize, isize); 8] = [
+const NEIGHBOR_OFFSETS: [(isize, isize); 8] = [
     (-1, -1),
     (0, -1),
     (1, -1),
@@ -104,7 +104,7 @@ pub fn count_paper(grid: &Grid, col: isize, row: isize) -> u32 {
     let grid_height = grid.len();
     let grid_width = grid[0].len();
 
-    for (d_col, d_row) in NEIGHBOR_OFFSETS_ROW_COL {
+    for (d_col, d_row) in NEIGHBOR_OFFSETS {
         let neighbor_col = d_col + col;
         let neighbor_row = d_row + row;
 
