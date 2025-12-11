@@ -9,6 +9,10 @@ pub fn main() {
 
     let example_input = "
 7,1
+8,1
+8,4
+9,4
+9,1
 11,1
 11,7
 9,7
