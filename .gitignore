@@ -1,0 +1,18 @@
+# Rust build artifacts
+target/
+**/*.rs.bk
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Env / secrets (AoC session keys live in per-project .env)
+.env
+
+# Editor / OS
+.idea/
+.DS_Store
+Thumbs.db
